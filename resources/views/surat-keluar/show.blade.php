@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -11,22 +10,27 @@
 
     <p>
         <strong>Nomor Surat:</strong>
-        {{ $surat['nomor_surat'] }}
+        {{ $surat->no_surat }}
     </p>
 
     <p>
         <strong>Tanggal:</strong>
-        {{ $surat['tanggal'] }}
+        {{ $surat->tanggal }}
     </p>
 
     <p>
-        <strong>Tujuan:</strong>
-        {{ $surat['tujuan'] }}
+        <strong>Penerima:</strong>
+        {{ $surat->penerima }}
     </p>
 
     <p>
         <strong>Perihal:</strong>
-        {{ $surat['perihal'] }}
+        {{ $surat->perihal }}
+    </p>
+
+    <p>
+        <strong>Keterangan:</strong>
+        {{ $surat->keterangan }}
     </p>
 
     <a href="{{ route('surat-keluar.index') }}">Kembali</a>
