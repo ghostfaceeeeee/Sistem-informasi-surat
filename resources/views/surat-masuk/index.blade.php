@@ -19,15 +19,15 @@
         </thead>
 
         <tbody>
-            @forelse ($suratMasuk as $surat)
+            @forelse ($incomingLetters as $surat)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $surat['nomor_surat'] }}</td>
-                    <td>{{ $surat['tanggal'] }}</td>
-                    <td>{{ $surat['pengirim'] }}</td>
-                    <td>{{ $surat['perihal'] }}</td>
+                    <td>{{ $surat->no_surat }}</td>
+                    <td>{{ $surat->tanggal }}</td>
+                    <td>{{ $surat->pengirim }}</td>
+                    <td>{{ $surat->perihal }}</td>
                     <td>
-                        <a href="{{ route('surat-masuk.show', $surat['id']) }}">
+                        <a href="{{ route('surat-masuk.show', $surat->id) }}">
                             Detail
                         </a>
                     </td>
