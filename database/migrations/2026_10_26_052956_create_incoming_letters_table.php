@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('pengirim');
             $table->string('perihal');
             $table->text('keterangan')->nullable();
-
             $table->timestamps();
         });
     }
