@@ -21,7 +21,7 @@ class IncomingLetterSeeder extends Seeder
                 'perihal' => 'undangan rapat',
                 'keterangan' => 'undangan rapat di ruang 1',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'nomor_surat' => '002/FTx/2026',
@@ -30,7 +30,7 @@ class IncomingLetterSeeder extends Seeder
                 'perihal' => 'undangan sukses',
                 'keterangan' => 'undangan sukses dalam pelaksanaan kegiatan',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'nomor_surat' => '003/FTx/2026',
@@ -39,7 +39,7 @@ class IncomingLetterSeeder extends Seeder
                 'perihal' => 'undangan Akademik',
                 'keterangan' => 'undangan akademik untuk kegiatan seminar',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
         ]);
     }
