@@ -1,72 +1,69 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\IncomingLetter;
 use Illuminate\Http\Request;
-use App\Models\incomingLetter as ModelsIncomingLetter;
-// use GuzzleHttp\Psr7\Request;
-
-use function PHPUnit\Framework\returnArgument;
-
-// use Illuminate\Http\Request;
+use App\Models\IncomingLetter;
 
 class SuratMasukController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $suratMasuk = IncomingLetter::orderBy('id', 'desc')->get();
-     return view('surat-masuk.index', compact('suratMasuk'));
+        return view('surat-masuk.index', compact('suratMasuk'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('surat-masuk.create');
     }
 
-public function store(Request $request){
-    $validated = $request->validate([
-        'nomor_surat' => 'required|string|max:255',
-        'tanggal'     => 'required|date',
-        'pengirim'    => 'required|string|max:255',
-        'perihal'     => 'required|string|max:255',
-        'keterangan'  => 'nullable|string',
-
-    ]);
-    ModelsIncomingLetter::create($validated);
-    return redirect()->route('surat-masuk.index')
-        ->with('success','Surat berhasil ditambah.');
-}
-
-    public function show($id) {
-        
-     $surat = IncomingLetter::findOrFail($id);
-     return view('surat-masuk.show', compact('surat'));
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nomor_surat' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'pengirim' => 'required|string|max:255',
+            'perihal' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
+        ]);
+        IncomingLetter::create($validated);
+        return redirect()->route('surat-masuk.index')
+            ->with('success', 'Surat berhasil ditambahkan.');
     }
-    public function edit($id){
+
+    public function show($id)
+    {
         $surat = IncomingLetter::findOrFail($id);
-        return view('surat-masuk.edit',compact('surat'));
-
-
+        return view('surat-masuk.show', compact('surat'));
     }
 
-    public function update(Request $request,$id){
-        $surat = incomingLetter::findOrFail($id);
-        $validated =$request->validate([
-        'nomor_surat' => 'required|string|max:255',
-        'tanggal'     => 'required|date',
-        'pengirim'    => 'required|string|max:255',
-        'perihal'     => 'required|string|max:255',
-        'keterangan'  => 'nullable|string',
+    public function edit($id)
+    {
+        $surat = IncomingLetter::findOrFail($id);
+        return view('surat-masuk.edit', compact('surat'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $surat = IncomingLetter::findOrFail($id);
+        $validated = $request->validate([
+            'nomor_surat' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'pengirim' => 'required|string|max:255',
+            'perihal' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
         ]);
         $surat->update($validated);
         return redirect()->route('surat-masuk.index')
-            ->with('success','Surat berhasil diperbaharui.');
+            ->with('success', 'Surat berhasil diperbarui.');
     }
-    public function destory($id){
-        $surat = incomingLetter::findOrFail($id);
-        $surat ->delete();
-        return redirect()->route('surat-masuk.index')
-            ->with('success','Surat berhasil dihapus');
-    
-        }
-}
 
-    
+    public function destroy($id)
+    {
+        $surat = IncomingLetter::findOrFail($id);
+        $surat->delete();
+        return redirect()->route('surat-masuk.index')
+            ->with('success', 'Surat berhasil dihapus.');
+    }
+}
