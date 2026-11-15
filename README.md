@@ -1,12 +1,29 @@
 # Sistem Informasi Surat
 
-Aplikasi web sederhana untuk pencatatan dan pengelolaan arsip surat masuk dan surat keluar, dibangun menggunakan Laravel 12.
+Aplikasi web sederhana untuk pencatatan dan pengelolaan arsip surat masuk dan surat keluar, dibangun menggunakan Laravel 12 dan Tailwind CSS.
 
 Proyek ini dibuat untuk membantu pengelolaan persuratan agar pencatatan nomor surat, tanggal, pengirim, penerima, serta perihal dapat terdata dengan rapi dalam satu sistem.
 
+## Tampilan Antarmuka
+
+### Dashboard Overview
+<p align="center">
+  <img src="assets/screenshots/dashboard.png" width="100%" alt="Dashboard Overview" />
+</p>
+
+### Daftar Surat Masuk
+<p align="center">
+  <img src="assets/screenshots/surat-masuk.png" width="100%" alt="Daftar Surat Masuk" />
+</p>
+
+### Daftar Surat Keluar
+<p align="center">
+  <img src="assets/screenshots/surat-keluar.png" width="100%" alt="Daftar Surat Keluar" />
+</p>
+
 ## Fitur
 
-- Dashboard ringkasan persuratan
+- Dashboard ringkasan persuratan dan statistik jumlah arsip
 - Manajemen data surat masuk (nomor surat, tanggal, pengirim, perihal, dan keterangan)
 - Manajemen data surat keluar (nomor surat, tanggal, penerima, perihal, dan keterangan)
 - Tampilan detail rincian untuk setiap surat
