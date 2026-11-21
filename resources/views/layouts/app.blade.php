@@ -29,8 +29,7 @@
                         </svg>
                     </div>
                     <div>
-                        <span class="text-sm sm:text-base font-bold text-white tracking-tight">SIS Surat</span>
-                        <span class="hidden sm:inline-block text-[11px] text-blue-200 ml-1 font-normal">| Praktikum Web 2</span>
+                        <span class="text-sm sm:text-base font-bold text-white tracking-tight">SIS</span>
                     </div>
                 </a>
 

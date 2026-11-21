@@ -62,7 +62,7 @@
             </form>
         </div>
 
-        <p class="text-center text-[11px] text-slate-400 mt-4">&copy; {{ date('Y') }} Sistem Informasi Surat — Praktikum Web 2</p>
+        <p class="text-center text-[11px] text-slate-400 mt-4">&copy; {{ date('Y') }} Sistem Informasi Surat</p>
     </div>
 </body>
 </html>
