@@ -10,10 +10,12 @@
                 <h1 class="text-lg font-bold text-slate-800 mt-1">Detail Surat Masuk</h1>
             </div>
             <div class="flex items-center gap-1.5">
+                @can('manage-letters')
                 <a href="{{ route('surat-masuk.edit', $surat->id) }}"
                    class="rounded-lg bg-amber-500 hover:bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white shadow-xs transition active:scale-95">
                     Edit Surat
                 </a>
+                @endcan
             </div>
         </div>
 

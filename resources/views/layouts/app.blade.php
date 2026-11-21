@@ -57,6 +57,27 @@
                         </svg>
                         Surat Keluar
                     </a>
+
+                    {{-- Auth: User Info & Logout --}}
+                    @auth
+                    <div class="ml-3 pl-3 border-l border-blue-500/40 flex items-center gap-2">
+                        <div class="text-right">
+                            <span class="block text-[11px] font-semibold text-white leading-tight">{{ auth()->user()->name }}</span>
+                            <span class="block text-[10px] text-blue-200 capitalize">{{ auth()->user()->role }}</span>
+                        </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                    class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium text-blue-100 hover:bg-red-500/80 hover:text-white transition"
+                                    title="Keluar">
+                                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                                </svg>
+                                Keluar
+                            </button>
+                        </form>
+                    </div>
+                    @endauth
                 </div>
 
                 {{-- Mobile Menu Button --}}
@@ -73,6 +94,15 @@
             <a href="{{ route('dashboard') }}" class="block px-3 py-1.5 rounded text-xs font-medium {{ request()->routeIs('dashboard') ? 'bg-blue-800 text-white' : 'text-blue-100 hover:bg-blue-700' }}">Dashboard</a>
             <a href="{{ route('surat-masuk.index') }}" class="block px-3 py-1.5 rounded text-xs font-medium {{ request()->routeIs('surat-masuk.*') ? 'bg-blue-800 text-white' : 'text-blue-100 hover:bg-blue-700' }}">Surat Masuk</a>
             <a href="{{ route('surat-keluar.index') }}" class="block px-3 py-1.5 rounded text-xs font-medium {{ request()->routeIs('surat-keluar.*') ? 'bg-blue-800 text-white' : 'text-blue-100 hover:bg-blue-700' }}">Surat Keluar</a>
+            @auth
+            <div class="border-t border-blue-700/60 pt-2 mt-2">
+                <span class="block px-3 text-[11px] text-blue-200">Masuk sebagai: <strong class="text-white">{{ auth()->user()->name }}</strong> ({{ auth()->user()->role }})</span>
+                <form method="POST" action="{{ route('logout') }}" class="mt-1">
+                    @csrf
+                    <button type="submit" class="block w-full text-left px-3 py-1.5 rounded text-xs font-medium text-red-200 hover:bg-red-500/60 hover:text-white">Keluar</button>
+                </form>
+            </div>
+            @endauth
         </div>
     </nav>
 

@@ -23,6 +23,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
             </div>
+            @can('manage-letters')
             <a href="{{ route('surat-masuk.create') }}"
                class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 text-xs font-semibold text-white shadow-xs transition active:scale-95">
                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
@@ -30,6 +31,7 @@
                 </svg>
                 Tambah Surat Masuk
             </a>
+            @endcan
         </div>
     </div>
 
@@ -61,6 +63,7 @@
                                        class="rounded px-2 py-1 text-[11px] font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition">
                                         Detail
                                     </a>
+                                    @can('manage-letters')
                                     <a href="{{ route('surat-masuk.edit', $surat->id) }}"
                                        class="rounded px-2 py-1 text-[11px] font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 transition">
                                         Edit
@@ -73,6 +76,7 @@
                                             Hapus
                                         </button>
                                     </form>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

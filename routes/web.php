@@ -3,22 +3,60 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\incomingLetter;
 use App\Models\OutGoingLetter;
 
-// Halaman Dashboard
-Route::get('/', function () {
-    $jumlahMasuk = incomingLetter::count();
-    $jumlahKeluar = OutGoingLetter::count();
-    $suratMasukTerbaru = incomingLetter::orderBy('tanggal', 'desc')->take(5)->get();
-    $suratKeluarTerbaru = OutGoingLetter::orderBy('tanggal', 'desc')->take(5)->get();
-    return view('dashboard', compact('jumlahMasuk', 'jumlahKeluar', 'suratMasukTerbaru', 'suratKeluarTerbaru'));
-})->name('dashboard');
+// ==========================================
+// Route untuk Guest (belum login)
+// ==========================================
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+});
 
-// Halaman Surat Masuk
-Route::resource('surat-masuk', SuratMasukController::class)
-    ->parameters(['surat-masuk' => 'id']);
+// ==========================================
+// Route untuk User yang sudah login
+// ==========================================
+Route::middleware('auth')->group(function () {
 
-// Halaman Surat Keluar
-Route::resource('surat-keluar', SuratKeluarController::class)
-    ->parameters(['surat-keluar' => 'id']);
+    // Logout
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    // Dashboard
+    Route::get('/', function () {
+        $jumlahMasuk = incomingLetter::count();
+        $jumlahKeluar = OutGoingLetter::count();
+        $suratMasukTerbaru = incomingLetter::orderBy('tanggal', 'desc')->take(5)->get();
+        $suratKeluarTerbaru = OutGoingLetter::orderBy('tanggal', 'desc')->take(5)->get();
+        return view('dashboard', compact('jumlahMasuk', 'jumlahKeluar', 'suratMasukTerbaru', 'suratKeluarTerbaru'));
+    })->name('dashboard');
+
+    // ==========================================
+    // Surat Masuk
+    // ==========================================
+    // Semua user (petugas & pembaca) bisa lihat daftar dan detail
+    Route::resource('surat-masuk', SuratMasukController::class)
+        ->only(['index', 'show'])
+        ->parameters(['surat-masuk' => 'id']);
+
+    // Hanya petugas yang bisa create/store/edit/update/destroy
+    Route::resource('surat-masuk', SuratMasukController::class)
+        ->except(['index', 'show'])
+        ->parameters(['surat-masuk' => 'id'])
+        ->middleware('can:manage-letters');
+
+    // ==========================================
+    // Surat Keluar
+    // ==========================================
+    // Semua user (petugas & pembaca) bisa lihat daftar dan detail
+    Route::resource('surat-keluar', SuratKeluarController::class)
+        ->only(['index', 'show'])
+        ->parameters(['surat-keluar' => 'id']);
+
+    // Hanya petugas yang bisa create/store/edit/update/destroy
+    Route::resource('surat-keluar', SuratKeluarController::class)
+        ->except(['index', 'show'])
+        ->parameters(['surat-keluar' => 'id'])
+        ->middleware('can:manage-letters');
+});

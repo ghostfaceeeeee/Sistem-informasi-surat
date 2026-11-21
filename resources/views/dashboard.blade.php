@@ -10,6 +10,7 @@
             <p class="text-xs text-slate-500 mt-0.5">Ringkasan data surat masuk dan surat keluar.</p>
         </div>
         <div class="flex items-center gap-2">
+            @can('manage-letters')
             <a href="{{ route('surat-masuk.create') }}"
                class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 text-xs font-semibold text-white shadow-xs transition active:scale-95">
                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
@@ -24,6 +25,7 @@
                 </svg>
                 Tambah Surat Keluar
             </a>
+            @endcan
         </div>
     </div>
 
