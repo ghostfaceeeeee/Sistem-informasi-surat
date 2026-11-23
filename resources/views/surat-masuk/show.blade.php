@@ -43,6 +43,26 @@
                     <span class="col-span-2 text-slate-800">{{ $surat->perihal }}</span>
                 </div>
                 <div class="py-2.5 grid grid-cols-3">
+                    <span class="text-slate-500 font-medium">Kategori</span>
+                    <span class="col-span-2 text-slate-800 font-medium">
+                        {{ $surat->category?->nama ?? 'Tanpa kategori' }}
+                    </span>
+                </div>
+                @if ($surat->lampiran)
+                <div class="py-2.5 grid grid-cols-3 items-center">
+                    <span class="text-slate-500 font-medium">Lampiran</span>
+                    <div class="col-span-2">
+                        <a href="{{ asset('storage/' . $surat->lampiran) }}" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 transition">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                            </svg>
+                            Lihat lampiran
+                        </a>
+                    </div>
+                </div>
+                @endif
+                <div class="py-2.5 grid grid-cols-3">
                     <span class="text-slate-500 font-medium">Keterangan</span>
                     <span class="col-span-2 text-slate-700 whitespace-pre-line">{{ $surat->keterangan ?: '-' }}</span>
                 </div>

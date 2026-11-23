@@ -14,7 +14,7 @@
 
         {{-- Compact Form Card --}}
         <div class="rounded-xl border border-slate-200/80 bg-white p-5 shadow-xs">
-            <form action="{{ route('surat-keluar.update', $surat->id) }}" method="POST" class="space-y-3.5">
+            <form action="{{ route('surat-keluar.update', $surat->id) }}" method="POST" enctype="multipart/form-data" class="space-y-3.5">
                 @csrf
                 @method('PUT')
 
@@ -52,6 +52,43 @@
                     <input type="text" id="perihal" name="perihal" value="{{ old('perihal', $surat->perihal) }}" required
                            class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
                     @error('perihal')
+                        <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="category_id" class="block text-xs font-semibold text-slate-700 mb-1">Kategori <span class="text-slate-400 font-normal">(Opsional)</span></label>
+                    <select id="category_id" name="category_id"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+                        <option value="">-- Tanpa kategori --</option>
+                        @foreach ($categories as $kategori)
+                            <option value="{{ $kategori->id }}" @selected(old('category_id', $surat->category_id ?? '') == $kategori->id)>
+                                {{ $kategori->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
+                        <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="lampiran" class="block text-xs font-semibold text-slate-700 mb-1">Lampiran <span class="text-slate-400 font-normal">(PDF/JPG/PNG, maks. 2 MB)</span></label>
+                    @if ($surat->lampiran)
+                        <div class="mb-2 flex items-center gap-2 text-xs text-slate-600 bg-slate-50 border border-slate-200 px-2.5 py-1.5 rounded-lg">
+                            <span class="text-slate-500">File saat ini:</span>
+                            <a href="{{ asset('storage/' . $surat->lampiran) }}" target="_blank" rel="noopener" class="text-blue-600 font-medium hover:underline flex items-center gap-1">
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                </svg>
+                                Lihat lampiran
+                            </a>
+                        </div>
+                    @endif
+                    <input type="file" id="lampiran" name="lampiran" accept=".pdf,.jpg,.jpeg,.png"
+                           class="w-full text-xs text-slate-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-slate-300 rounded-lg cursor-pointer focus:outline-none">
+                    <p class="mt-1 text-[11px] text-slate-400">Kosongkan jika tidak ingin mengganti file lampiran.</p>
+                    @error('lampiran')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
                     @enderror
                 </div>

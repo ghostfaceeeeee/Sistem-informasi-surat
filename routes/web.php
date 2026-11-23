@@ -35,28 +35,28 @@ Route::middleware('auth')->group(function () {
     // ==========================================
     // Surat Masuk
     // ==========================================
-    // Semua user (petugas & pembaca) bisa lihat daftar dan detail
-    Route::resource('surat-masuk', SuratMasukController::class)
-        ->only(['index', 'show'])
-        ->parameters(['surat-masuk' => 'id']);
-
     // Hanya petugas yang bisa create/store/edit/update/destroy
     Route::resource('surat-masuk', SuratMasukController::class)
         ->except(['index', 'show'])
         ->parameters(['surat-masuk' => 'id'])
         ->middleware('can:manage-letters');
 
+    // Semua user (petugas & pembaca) bisa lihat daftar dan detail
+    Route::resource('surat-masuk', SuratMasukController::class)
+        ->only(['index', 'show'])
+        ->parameters(['surat-masuk' => 'id']);
+
     // ==========================================
     // Surat Keluar
     // ==========================================
-    // Semua user (petugas & pembaca) bisa lihat daftar dan detail
-    Route::resource('surat-keluar', SuratKeluarController::class)
-        ->only(['index', 'show'])
-        ->parameters(['surat-keluar' => 'id']);
-
     // Hanya petugas yang bisa create/store/edit/update/destroy
     Route::resource('surat-keluar', SuratKeluarController::class)
         ->except(['index', 'show'])
         ->parameters(['surat-keluar' => 'id'])
         ->middleware('can:manage-letters');
+
+    // Semua user (petugas & pembaca) bisa lihat daftar dan detail
+    Route::resource('surat-keluar', SuratKeluarController::class)
+        ->only(['index', 'show'])
+        ->parameters(['surat-keluar' => 'id']);
 });

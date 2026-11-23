@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class incomingLetter extends Model
 {
@@ -12,6 +13,12 @@ class incomingLetter extends Model
         'pengirim',
         'perihal',
         'keterangan',
-        
+        'category_id',
+        'lampiran',
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

@@ -14,7 +14,7 @@
 
         {{-- Compact Form Card --}}
         <div class="rounded-xl border border-slate-200/80 bg-white p-5 shadow-xs">
-            <form action="{{ route('surat-keluar.store') }}" method="POST" class="space-y-3.5">
+            <form action="{{ route('surat-keluar.store') }}" method="POST" enctype="multipart/form-data" class="space-y-3.5">
                 @csrf
 
                 <div>
@@ -54,6 +54,31 @@
                            class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
                            placeholder="Perihal surat keluar">
                     @error('perihal')
+                        <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="category_id" class="block text-xs font-semibold text-slate-700 mb-1">Kategori <span class="text-slate-400 font-normal">(Opsional)</span></label>
+                    <select id="category_id" name="category_id"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+                        <option value="">-- Tanpa kategori --</option>
+                        @foreach ($categories as $kategori)
+                            <option value="{{ $kategori->id }}" @selected(old('category_id', $surat->category_id ?? '') == $kategori->id)>
+                                {{ $kategori->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
+                        <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="lampiran" class="block text-xs font-semibold text-slate-700 mb-1">Lampiran <span class="text-slate-400 font-normal">(PDF/JPG/PNG, maks. 2 MB)</span></label>
+                    <input type="file" id="lampiran" name="lampiran" accept=".pdf,.jpg,.jpeg,.png"
+                           class="w-full text-xs text-slate-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-slate-300 rounded-lg cursor-pointer focus:outline-none">
+                    @error('lampiran')
                         <p class="mt-1 text-[11px] text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
