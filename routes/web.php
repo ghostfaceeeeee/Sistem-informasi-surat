@@ -35,6 +35,11 @@ Route::middleware('auth')->group(function () {
     // ==========================================
     // Surat Masuk
     // ==========================================
+    // Hapus lampiran (petugas only)
+    Route::delete('surat-masuk/{id}/lampiran', [SuratMasukController::class, 'deleteLampiran'])
+        ->name('surat-masuk.delete-lampiran')
+        ->middleware('can:manage-letters');
+
     // Hanya petugas yang bisa create/store/edit/update/destroy
     Route::resource('surat-masuk', SuratMasukController::class)
         ->except(['index', 'show'])
@@ -49,6 +54,11 @@ Route::middleware('auth')->group(function () {
     // ==========================================
     // Surat Keluar
     // ==========================================
+    // Hapus lampiran (petugas only)
+    Route::delete('surat-keluar/{id}/lampiran', [SuratKeluarController::class, 'deleteLampiran'])
+        ->name('surat-keluar.delete-lampiran')
+        ->middleware('can:manage-letters');
+
     // Hanya petugas yang bisa create/store/edit/update/destroy
     Route::resource('surat-keluar', SuratKeluarController::class)
         ->except(['index', 'show'])
