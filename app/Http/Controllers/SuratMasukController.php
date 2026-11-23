@@ -108,17 +108,4 @@ class SuratMasukController extends Controller
         return redirect()->route('surat-masuk.index')
             ->with('success', 'Surat berhasil dihapus.');
     }
-
-    public function deleteLampiran($id)
-    {
-        $surat = incomingLetter::findOrFail($id);
-
-        if ($surat->lampiran) {
-            Storage::disk('public')->delete($surat->lampiran);
-            $surat->update(['lampiran' => null]);
-        }
-
-        return redirect()->route('surat-masuk.edit', $surat->id)
-            ->with('success', 'Lampiran berhasil dihapus.');
-    }
 }
